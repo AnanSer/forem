@@ -8,10 +8,12 @@ const dbconnection = mysql2.createConnection({
   connectionLimit: 10,
 });
 
-dbconnection.execute("select * from users", (err, results, fields) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
-  console.log(results);
-});
+// dbconnection.execute("select * from users", (err, results, fields) => {
+//   if (err) {
+//     console.error(err);
+//     return;
+//   }
+//   console.log(results);
+// });
+
+module.exports = dbconnection.promise();

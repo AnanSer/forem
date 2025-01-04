@@ -4,7 +4,7 @@ const dbconnection = mysql2.createConnection({
   user: "forum-admin",
   database: "question-forum",
   host: "localhost",
-  password: "admin1234",
+  password: "admin123",
   connectionLimit: 10,
 });
 

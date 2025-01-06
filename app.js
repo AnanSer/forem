@@ -8,6 +8,9 @@ const dbConnection = require("./db/dbConfig");
 // user routes middleware file
 const userRoutes = require("./routes/userRoute");
 
+//json middleware to extract json data from request body
+app.use(express.json());
+
 // user routes middleware
 app.use("/api/users", userRoutes);
 

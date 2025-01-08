@@ -54,7 +54,39 @@ async function register(req, res) {
 
 async function login(req, res) {
   // register user
-  res.send("login");
+
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ msg: "provide all required fields" });
+  }
+
+  try {
+    const [user] = await dbConnection.query(
+      "SELECT * FROM users WHERE email = ?",
+      [email]
+    );
+    if (user.length === 0)
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ msg: "user does not exist" });
+
+    // compare password
+    const isMatch = await bcyrypt.compare(password, user[0].password);
+
+    if (!isMatch) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ msg: "invalid credential" });
+    }
+
+    return res.json({ user: user[0].password });
+  } catch {
+    console.error("Database error:", err.message);
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json;
+  }
 }
 
 async function checkUser(req, res) {

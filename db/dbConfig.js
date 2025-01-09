@@ -1,10 +1,10 @@
 const mysql2 = require("mysql2");
 
 const dbconnection = mysql2.createConnection({
-  user: "forum-admin",
-  database: "question-forum",
+  user: process.env.USER,
+  database: process.env.DATABASE,
   host: "localhost",
-  password: "admin123",
+  password: process.env.PASSWORD,
   connectionLimit: 10,
 });
 

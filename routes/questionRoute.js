@@ -3,7 +3,7 @@ const router = express.Router();
 
 // authenthication middleware
 const authMiddleware = require("../middleware/authMiddleware");
-router.get("/all-question", authMiddleware, (req, res) => {
+router.get("/all-questions", authMiddleware, (req, res) => {
   res.send("all questions");
 });
 

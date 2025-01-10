@@ -4,6 +4,11 @@ const express = require("express");
 const app = express();
 const port = 5500;
 
+const cors = require("cors");
+
+// cors middleware
+app.use(cors());
+
 // db connection
 const dbConnection = require("./db/dbConfig");
 
@@ -13,6 +18,7 @@ const userRoutes = require("./routes/userRoute");
 // user route middleware file
 const questionRoutes = require("./routes/questionRoute");
 const authMiddleware = require("./middleware/authMiddleware");
+const { CONFLICT } = require("http-status-codes");
 
 //json middleware to extract json data from request body
 app.use(express.json());

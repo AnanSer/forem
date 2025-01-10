@@ -2,7 +2,6 @@ import { useRef } from "react";
 
 import axios from "../axiosConfig";
 
-
 function Register() {
   const usernameDom = useRef();
   const firstNameDom = useRef();
@@ -11,32 +10,32 @@ function Register() {
   const passwordDom = useRef();
 
   async function handleSubmit(event) {
-   
     event.preventDefault();
-    try{
-        await axios.post("/users/register", { 
-            username: usernameDom.current.value,
-            firstname: firstNameDom.current.value,
-            lastname: lastNameDom.current.value,
-            email: emailDom.current.value,
-            password: passwordDom.current.value
-          })
-    }catch(err){
-        console.log(error.response)
+    try {
+      await axios.post("/users/register", {
+        username: usernameDom.current.value,
+        firstname: firstNameDom.current.value,
+        lastname: lastNameDom.current.value,
+        email: emailDom.current.value,
+        password: passwordDom.current.value,
+      });
+    } catch (error) {
+      console.log(error.response);
     }
-   
-//     try{
-//     await axios.post("/users/register", {
-    
-//             username:'',
-//          firstname:'',
-// lastname:'',email:'',
-// password:''});
+  }
 
-//         });
-//     }catch(err){
-//         console.log(err.response);
-//   }
+  //     try{
+  //     await axios.post("/users/register", {
+
+  //             username:'',
+  //          firstname:'',
+  // lastname:'',email:'',
+  // password:''});
+
+  //         });
+  //     }catch(err){
+  //         console.log(err.response);
+  //   }
   return (
     <div>
       <form onSubmit={handleSubmit}>

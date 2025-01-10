@@ -92,8 +92,6 @@ async function login(req, res) {
     });
 
     return res.status(StatusCodes.OK).json({ msg: "login successful", token });
-
-    return res.json({ user: user[0].password });
   } catch {
     console.error("Database error:", err.message);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json;

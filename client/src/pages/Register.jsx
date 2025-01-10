@@ -1,12 +1,11 @@
-import { useRef } from "react";
-
-import { useNavigate } from "react-router-dom";
-
-import axios from "../axiosConfig";
+import { useRef } from "react"; // Import useRef hook from React
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook from react-router-dom
+import axios from "../axiosConfig"; // Import axios instance
 
 function Register() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize navigate function
 
+  // Create references for form input elements
   const usernameDom = useRef();
   const firstNameDom = useRef();
   const lastNameDom = useRef();
@@ -14,13 +13,16 @@ function Register() {
   const passwordDom = useRef();
 
   async function handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default form submission
 
+    // Get values from input elements
     const usernameValue = usernameDom.current.value;
     const firstNameValue = firstNameDom.current.value;
     const lastNameValue = lastNameDom.current.value;
     const emailValue = emailDom.current.value;
     const passwordValue = passwordDom.current.value;
+
+    // Check if all required fields are filled
     if (
       !usernameValue ||
       !firstNameValue ||
@@ -33,19 +35,20 @@ function Register() {
     }
 
     try {
+      // Send POST request to register the user
       await axios.post("/users/register", {
         username: usernameValue,
         firstname: firstNameValue,
-        lastname: lastNameValue,
+        lastname: firstNameValue,
         email: emailValue,
         password: passwordValue,
       });
 
       alert("register successfull. please login ");
-      navigate("/login");
+      navigate("/login"); // Navigate to login page
     } catch (error) {
       alert("something went wrong, try again later");
-      console.log(error.response);
+      console.log(error.response); // Log error response
     }
   }
 

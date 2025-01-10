@@ -81,7 +81,7 @@ async function login(req, res) {
     if (!isMatch) {
       return res
         .status(StatusCodes.BAD_REQUEST)
-        .json({ msg: "invalid credential" });
+        .json({ msg: "invalid credential " });
     }
 
     const username = user[0].username;
@@ -91,7 +91,9 @@ async function login(req, res) {
       expiresIn: "1d",
     });
 
-    return res.status(StatusCodes.OK).json({ msg: "login successful", token });
+    return res
+      .status(StatusCodes.OK)
+      .json({ msg: "login successful", token, username });
   } catch {
     console.error("Database error:", err.message);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json;

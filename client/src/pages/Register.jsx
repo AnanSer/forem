@@ -1,8 +1,12 @@
 import { useRef } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import axios from "../axiosConfig";
 
 function Register() {
+  const navigate = useNavigate();
+
   const usernameDom = useRef();
   const firstNameDom = useRef();
   const lastNameDom = useRef();
@@ -11,31 +15,40 @@ function Register() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    const usernameValue = usernameDom.current.value;
+    const firstNameValue = firstNameDom.current.value;
+    const lastNameValue = lastNameDom.current.value;
+    const emailValue = emailDom.current.value;
+    const passwordValue = passwordDom.current.value;
+    if (
+      !usernameValue ||
+      !firstNameValue ||
+      !lastNameValue ||
+      !emailValue ||
+      !passwordValue
+    ) {
+      alert("please provide all required informatiion ");
+      return;
+    }
+
     try {
       await axios.post("/users/register", {
-        username: usernameDom.current.value,
-        firstname: firstNameDom.current.value,
-        lastname: lastNameDom.current.value,
-        email: emailDom.current.value,
-        password: passwordDom.current.value,
+        username: usernameValue,
+        firstname: firstNameValue,
+        lastname: lastNameValue,
+        email: emailValue,
+        password: passwordValue,
       });
+
+      alert("register successfull. please login ");
+      navigate("/login");
     } catch (error) {
+      alert("something went wrong, try again later");
       console.log(error.response);
     }
   }
 
-  //     try{
-  //     await axios.post("/users/register", {
-
-  //             username:'',
-  //          firstname:'',
-  // lastname:'',email:'',
-  // password:''});
-
-  //         });
-  //     }catch(err){
-  //         console.log(err.response);
-  //   }
   return (
     <div>
       <form onSubmit={handleSubmit}>
